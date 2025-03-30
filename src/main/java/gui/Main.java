@@ -33,7 +33,7 @@ public class Main extends JFrame  implements ActionListener{
 	private JButton jb3;
 	private JPanel jp8;
 	private JComponent jp9;
-	private JButton jb4;
+//	private JButton jb4;
 	private JPanel jp10;
 	private JPanel jp11;
 	private JButton jb5;

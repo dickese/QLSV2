@@ -1,4 +1,4 @@
-package view;
+package gui;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -21,12 +21,10 @@ class TranslucentRoundedPanel extends JPanel {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        // Màu nền mờ (màu trắng với độ mờ)
         Color backgroundColor = new Color(255, 255, 255, (int)(opacity * 255));
         g2.setColor(backgroundColor);
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), cornerRadius, cornerRadius);
         
-        // Viền mờ
         Color borderColor = new Color(200, 200, 200, 150);
         g2.setColor(borderColor);
         g2.setStroke(new BasicStroke(1f));
@@ -169,7 +167,7 @@ public class TaiKhoan extends JPanel {
     	jpll.setOpaque(false);
     	jpll.setBackground(Color.LIGHT_GRAY);
     	jpll.setBorder(BorderFactory.createEmptyBorder(25,20,0,0));
-    	ImageIcon originalicon = new ImageIcon(getClass().getResource("/profile.png"));
+    	ImageIcon originalicon = new ImageIcon(getClass().getResource("/img/profile.png"));
     	Image img = originalicon.getImage().getScaledInstance(200,200,Image.SCALE_DEFAULT);
     	ImageIcon reicon = new ImageIcon(img);
     	jl2 = new JLabel(reicon);
@@ -213,7 +211,8 @@ public class TaiKhoan extends JPanel {
     	boxjplc2.add(box.createVerticalStrut(5));
     	boxjplc2.add(txtmatkhau);
     	boxjplc2.add(box.createVerticalStrut(5));
-    	boxjplc2.add(txtvaitro);    	
+    	boxjplc2.add(txtvaitro);
+    	
     	boxjplc.add(boxjplc1);
     	boxjplc.add(box.createHorizontalStrut(10));
     	boxjplc.add(boxjplc2);

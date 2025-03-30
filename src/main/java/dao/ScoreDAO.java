@@ -10,12 +10,8 @@ public class ScoreDAO {
     public ScoreDAO(MongoCollection<Document> collections) {
         this.collection = collections;
     }
-
-
-
     public void addScore(Score score) {
-        Document doc = new Document("_id", score.getId())
-                .append("studentId", score.getStudentId())
+        Document doc = new Document("studentId", score.getStudentId())
                 .append("subjectID", score.getSubjectId())
                 .append("regularPoint", score.getRegularPoint().toArray())
                 .append("midterm", score.getMidterm())
@@ -37,4 +33,6 @@ public class ScoreDAO {
                         .append("finalScore", score.getFinalScore()))
         );
     }
+
+    
 }

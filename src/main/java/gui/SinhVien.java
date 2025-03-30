@@ -1,4 +1,4 @@
-package view;
+package gui;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -146,7 +146,7 @@ public class SinhVien extends JPanel {
     	jpc.setPreferredSize(new Dimension(800,300));
     	//jpanel-left
     	
-    	jpcl = new TranslucentRoundedPanel(30, 0.50f);
+    	jpcl = new gui.TranslucentRoundedPanel(30, 0.50f);
     	jpcl.setLayout(new BorderLayout());
     	jpcl.setOpaque(false);
     	jpcl.setPreferredSize(new Dimension(700,200));
@@ -158,7 +158,7 @@ public class SinhVien extends JPanel {
     	jpll.setOpaque(false);
     	jpll.setBackground(Color.LIGHT_GRAY);
     	jpll.setBorder(BorderFactory.createEmptyBorder(25,20,0,0));
-    	ImageIcon originalicon = new ImageIcon(getClass().getResource("/student.png"));
+    	ImageIcon originalicon = new ImageIcon(getClass().getResource("/img/student.png"));
     	Image img = originalicon.getImage().getScaledInstance(200,200,Image.SCALE_DEFAULT);
     	ImageIcon reicon = new ImageIcon(img);
     	jl2 = new JLabel(reicon);
@@ -275,7 +275,7 @@ public class SinhVien extends JPanel {
     	
     	jpc.add(jpcl,BorderLayout.WEST);
     	//jp center-right	
-    	jpmaincr = new TranslucentRoundedPanel(30, 0.50f); // Thêm góc bo tròn và độ trong suốt
+    	jpmaincr = new gui.TranslucentRoundedPanel(30, 0.50f); // Thêm góc bo tròn và độ trong suốt
     	jpmaincr.setBackground(Color.LIGHT_GRAY);
     	jpmaincr.setBorder(BorderFactory.createCompoundBorder(
     	    jpmaincr.getBorder(), 

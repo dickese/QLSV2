@@ -1,4 +1,4 @@
-package view;
+package gui;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -149,7 +149,7 @@ public class LopHoc extends JPanel {
     	jpll.setOpaque(false);
     	jpll.setBackground(Color.LIGHT_GRAY);
     	jpll.setBorder(BorderFactory.createEmptyBorder(25,20,0,0));
-    	ImageIcon originalicon = new ImageIcon(getClass().getResource("/group-chat.png"));
+    	ImageIcon originalicon = new ImageIcon(getClass().getResource("/img/group-chat.png"));
     	Image img = originalicon.getImage().getScaledInstance(200,200,Image.SCALE_DEFAULT);
     	ImageIcon reicon = new ImageIcon(img);
     	jl2 = new JLabel(reicon);
