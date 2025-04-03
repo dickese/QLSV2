@@ -7,17 +7,40 @@ public class Score {
     private String id;
     private String studentId;
     private String subjectId;
+    private String classId;
+    private String enrollId;
     private List<Double> regularPoint;
     private double midterm;
     private double finalPoint;
 
-    public Score(String id, String studentId, String subjectId, List<Double> regularPoint, double midterm, double finalPoint) {
-        this.id = id;
+    public Score(String studentId, String subjectId, String classId, String enrollId,List<Double> regularPoint, double midterm, double finalPoint) {
         this.studentId = studentId;
         this.subjectId = subjectId;
         this.regularPoint = regularPoint;
         this.midterm = midterm;
         this.finalPoint = finalPoint;
+        this.classId = classId;
+        this.enrollId = enrollId;
+    }
+
+    public Score() {
+
+    }
+
+    public String getEnrollId() {
+        return enrollId;
+    }
+
+    public void setEnrollId(String enrollId) {
+        this.enrollId = enrollId;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
     }
 
     public double getFinalPoint() {
@@ -69,6 +92,7 @@ public class Score {
         this.subjectId = subjectId;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,5 +114,19 @@ public class Score {
         return new Object[]{this.getId(), this,getStudentId(),
                 this.getSubjectId(), this.getRegularPoint(),
                 this.getMidterm(), this.getFinalPoint(), this.getFinalScore()};
+    }
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "classId='" + classId + '\'' +
+                ", id='" + id + '\'' +
+                ", studentId='" + studentId + '\'' +
+                ", subjectId='" + subjectId + '\'' +
+                ", enrollId='" + enrollId + '\'' +
+                ", regularPoint=" + regularPoint +
+                ", midterm=" + midterm +
+                ", finalPoint=" + finalPoint +
+                '}';
     }
 }

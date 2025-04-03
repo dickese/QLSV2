@@ -1,5 +1,9 @@
 package gui;
 
+import com.mongodb.client.MongoCollection;
+import dao.AccountDAO;
+import org.bson.Document;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
@@ -96,8 +100,10 @@ public class TaiKhoan extends JPanel {
 	private Box boxjplc;
 	private Box boxjplc1;
 	private Box boxjplc2;
+	private AccountDAO dao;
 
-	public TaiKhoan()  {
+	public TaiKhoan(MongoCollection<Document> collection)  {
+		dao = new AccountDAO(collection);
 		this.setBackground(Color.LIGHT_GRAY);
         this.setLayout(new BorderLayout());
         jpn = new JPanel(new FlowLayout());

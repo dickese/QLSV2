@@ -1,6 +1,9 @@
 package gui;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import dao.AccountDAO;
+import org.bson.Document;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -39,8 +42,10 @@ public class DangNhap extends JFrame implements ActionListener {
 	private Box boxbtn2;
 	private JButton jb2;
     private AccountDAO dao;
-	public DangNhap() {
-        dao = new AccountDAO("mongodb://localhost:27017", "23704871");
+    private MongoDatabase db;
+	public DangNhap(MongoDatabase db) {
+        this.db = db;
+        dao = new AccountDAO(db.getCollection("accounts"));
         this.setTitle("Đăng Nhập");
         this.setSize(new Dimension(700, 500));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -140,10 +145,6 @@ public class DangNhap extends JFrame implements ActionListener {
         jbdangnhap.addActionListener(this);
     }
 
-    public static void main(String[] args) {
-        new DangNhap();
-    }
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
@@ -153,7 +154,8 @@ public class DangNhap extends JFrame implements ActionListener {
 			String pwd = new String(((JPasswordField)txtmk).getPassword());
 			if(dao.checkLogIn(username, pwd))
 			{
-				new Main();
+                setVisible(false);
+                SwingUtilities.invokeLater((() -> new LoadScreen(this.db)));
 			}
 			else {
 				JOptionPane.showMessageDialog(this,"Anh Nhắc Em!!");

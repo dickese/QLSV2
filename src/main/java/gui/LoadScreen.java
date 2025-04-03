@@ -1,5 +1,7 @@
 package gui;
 
+import com.mongodb.client.MongoDatabase;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +9,7 @@ public class LoadScreen extends JFrame {
     private JProgressBar progressBar;
 	private JLabel label;
 
-    public LoadScreen() {
+    public LoadScreen(MongoDatabase db) {
         setTitle("Loading Screen");
         setSize(700, 500);
         setLocationRelativeTo(null);
@@ -16,7 +18,7 @@ public class LoadScreen extends JFrame {
         
         // Tạo label
         this.setBackground(new Color(255,255,255));
-    	ImageIcon originalicon = new ImageIcon(getClass().getResource("/login.gif"));
+    	ImageIcon originalicon = new ImageIcon(getClass().getResource("/img/login.gif"));
     	Image img = originalicon.getImage().getScaledInstance(400,300,Image.SCALE_DEFAULT);
     	ImageIcon reicon = new ImageIcon(img);
     	
@@ -31,15 +33,15 @@ public class LoadScreen extends JFrame {
         add(progressBar, BorderLayout.SOUTH);
 
         setVisible(true);
-        loadProgress();
+        loadProgress(db);
     }
 
-    private void loadProgress() {
+    private void loadProgress(MongoDatabase db) {
         SwingWorker<Void, Integer> worker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() throws Exception {
                 for (int i = 0; i <= 100; i++) {
-                    Thread.sleep(40); // Giả lập tiến trình tải
+                    Thread.sleep(40);
                     publish(i);
                 }
                 return null;
@@ -52,14 +54,10 @@ public class LoadScreen extends JFrame {
 
             @Override
             protected void done() {
-                dispose(); // Đóng cửa sổ LoadScreen khi tải xong
-                SwingUtilities.invokeLater(Main::new); // Mở cửa sổ đăng nhập
+                dispose();
+                SwingUtilities.invokeLater(()-> new Main(db));
             }
         };
         worker.execute();
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(LoadScreen::new);
     }
 }

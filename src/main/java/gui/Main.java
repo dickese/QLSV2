@@ -1,4 +1,9 @@
 package gui;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,7 +20,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 public class Main extends JFrame  implements ActionListener{
     private JPanel jpl;
     private JLabel jl1;
@@ -51,9 +55,19 @@ public class Main extends JFrame  implements ActionListener{
 	private JPanel jp19;
 	private JPanel contentPanel;
 
-    public Main()  {
-        this.setTitle("^-^");
+    private MongoDatabase db;
+//    private static final String url = "mongodb://localhost:27017";
+//    private  static final String dbName = "23704871";
+//
+//    public Main() {
+//
+//    }
 
+
+    public Main(MongoDatabase db)  {
+        this.db = db;
+        this.setTitle("^-^");
+        setLocationRelativeTo(null);
         // Sidebar panel
         jpl = new JPanel();
         jpl.setBackground(new Color(204, 204, 255));
@@ -254,11 +268,10 @@ public class Main extends JFrame  implements ActionListener{
         jb1.addActionListener(this);
         jb2.addActionListener(this);
         jb3.addActionListener(this);
-        jb4.addActionListener(this);
         jb5.addActionListener(this);
         jb6.addActionListener(this);
         jb7.addActionListener(this);
-        
+        jb8.addActionListener(this);
         jb9.addActionListener(this);
         
         
@@ -286,17 +299,24 @@ public class Main extends JFrame  implements ActionListener{
     }
 
     public static void main(String[] args) {
-        new Main();
+        String url = "mongodb://localhost:27017";
+        String dbName = "23704871";
+        MongoClient client = MongoClients.create(url);
+        MongoDatabase db  = client.getDatabase(dbName);
+        new Main(db);
     }
 
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-
         contentPanel.removeAll();
 
-        if (source == jb1) 
-           contentPanel.add(new TaiKhoan(), BorderLayout.CENTER);
-        
+        if (source == jb1) {
+           contentPanel.add(new TaiKhoan(db.getCollection("accounts")), BorderLayout.CENTER);
+        }
+        else if(source == jb7){
+            contentPanel.add(new KetQua(db), BorderLayout.CENTER);
+        }
+
 
         contentPanel.revalidate();
         contentPanel.repaint();

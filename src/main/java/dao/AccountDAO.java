@@ -16,19 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDAO {
-    private MongoClient mongoClient;
-    private MongoDatabase database;
     private MongoCollection<Document> collection;
 
-//    private static int count = 31;
-//    public static String generateID(){
-//        count++;
-//        return "ACC0"+ String.valueOf(count);
-//    }
-    public AccountDAO(String connectionString, String dbName) {
-        mongoClient = MongoClients.create(connectionString);
-        database = mongoClient.getDatabase(dbName);
-        collection = database.getCollection("accounts");
+    public AccountDAO(MongoCollection<Document> coll) {
+        collection = coll;
     }
 
     public void addAccounts(Account accounts) {
@@ -65,15 +56,15 @@ public class AccountDAO {
     public boolean checkLogIn(String userName, String pwd){
         Document user = collection.find(new Document("username", userName)
                 .append("password", pwd)).first();
-        System.out.println(user);
         return user != null;
     }
+
     public void deleteAccounts(String userName, String pwd) {
         Document filter = new Document("username", userName).append("password", pwd);
         collection.deleteOne(filter);
     }
 
-    public void closeConnection() {
-        mongoClient.close();
-    }
+//    public void closeConnection() {
+//        mongoClient.close();
+//    }
 }
